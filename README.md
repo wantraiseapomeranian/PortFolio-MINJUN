@@ -87,7 +87,7 @@ https://port-folio-minjun-5iwm.vercel.app/
 ## 📁 프로젝트 구조
 
 ```
-portfolio/
+PortFolio-MINJUN/
 ├── public/
 │   └── assets/
 │       ├── favicon.png
@@ -126,14 +126,14 @@ portfolio/
 ### 필수 요구사항
 
 - Node.js 18.0.0 이상
-- npm 또는 yarn
+- npm
 
 ### 설치
 
 1. 저장소 클론
 ```bash
 git clone https://github.com/your-username/portfolio.git
-cd portfolio
+cd PortFolio-MINJUN
 ```
 
 2. 의존성 설치
@@ -359,5 +359,5 @@ npm run preview
 
 ---
 
-**마지막 업데이트**: 2025년 1월
+**마지막 업데이트**: 2026년 1월
 
