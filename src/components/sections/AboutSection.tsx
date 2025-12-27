@@ -160,23 +160,8 @@ const CodeProperty = styled.span`
   color: #005cc5;
 `;
 
-const CodeValue = styled.span`
-  color: #e36209;
-`;
-
 const CodeBracket = styled.span`
   color: #24292e;
-`;
-
-const CodeLink = styled.a`
-  color: #e36209;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.8;
-    text-decoration: underline;
-  }
 `;
 
 const containerVariants = {

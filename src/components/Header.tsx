@@ -8,7 +8,7 @@ const HeaderContainer = styled(motion.header)<{ $isScrolled: boolean }>`
   left: 0;
   right: 0;
   z-index: 1000;
-  background: ${({ $isScrolled, theme }) => 
+  background: ${({ $isScrolled }) => 
     $isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent'};
   backdrop-filter: ${({ $isScrolled }) => $isScrolled ? 'blur(10px)' : 'none'};
   box-shadow: ${({ $isScrolled }) => 
