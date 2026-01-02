@@ -88,7 +88,7 @@ export const timelineData: TimelineItem[] = [
   {
     date: '2025.11 - 2025.12',
     title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
-    description: '풀스택 개발자로 참여하여 Spring Boot 와 React를 사용하여 REST API를 구현하고, 컨텐츠 퀴즈 기능과 관리자 기능, 랭킹 페이지를 구현하였습니다.',
+    description: '풀스택 개발자로 참여하여 Spring Boot 와 React를 사용하여 RESTful API를 구현하고, 컨텐츠 퀴즈 기능과 관리자 기능, 랭킹 페이지를 구현하였습니다.',
   },
   {
     date: '2025.10 - 2025.11',
@@ -245,6 +245,7 @@ export const skillsData: SkillCategory[] = [
 export const projectsData: Project[] = [
   {
     title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
+    thumbnail: '/assets/review_tag_main.png',
     description: 'Spring Boot와 React를 활용하여 RESTful 아키텍처를 구현하고, 컨텐츠 퀴즈와 관리자 페이지, 랭킹 페이지를 구현하였습니다.',
     tags: ['Java', 'Spring Boot', 'React', 'JavaScript', 'Axios', 'Bootstrap', 'Oracle SQL'],
     githubUrl: [
@@ -254,6 +255,7 @@ export const projectsData: Project[] = [
   },
   {
     title: '개인 쇼핑몰 프로젝트(King Heart)',
+    thumbnail: '/assets/review_tag_main.png',
     description: 'Spring Boot와 JSP를 활용한 정통 MVC 패턴을 적용하여 데이터 흐름을 명확히 제어하고 장바구니 기능과 상품 카테고리 구현과 결제 기능을 구현하였습니다.',
     tags: ['Java', 'Spring Boot', 'JSP', 'Ajax', 'jQuery', 'Oracle SQL'],
     githubUrl: 'https://github.com/wantraiseapomeranian/kingHeart.git',
