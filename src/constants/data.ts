@@ -72,12 +72,12 @@ export const whatIDoData: WhatIDo[] = [
   {
     title: 'Frontend',
     icon: FaCode,
-    description: 'React를 활용하여 웹과 모바일 환경 모두에서 끊김 없는 사용자 경험(UX)을 설계합니다.',
+    description: 'React를 활용하여 웹 환경을 아우르는 서비스를 구축합니다. 재사용 가능한 컴포넌트 설계로 개발 생산성을 높입니다.',
   },
   {
-    title: 'Backend',
+    title: 'Backend Engineering',
     icon: FaServer,
-    description: 'Spring Boot와 NestJS를 상황에 맞게 활용하며, 비즈니스 로직에 최적화된 RESTful API 서버를 구축합니다.',
+    description: 'Spring Boot의 안정성과 NestJS의 유연함을 모두 활용합니다. 복잡한 비즈니스 로직을 명확한 아키텍처로 풀어내며, 확장성과 데이터 무결성을 최우선으로 고려한 API를 설계합니다.',
   },
   {
     title: 'DevOps',
@@ -89,33 +89,33 @@ export const whatIDoData: WhatIDo[] = [
 export const timelineData: TimelineItem[] = [
   {
     date: '2025.12',
-    title: '경기 기후 바이브코딩 해커톤 참여 및 특별상 수상',
-    description: "'기후 위기 해결'을 주제로 한 1일 해커톤에 참여하여 개인이 아이디어를 도출하고 프로토타입을 개발했습니다. 이 프로젝트로 국토지리정보원 특별상을 수상하였고, 짧은 시간 내에 결과물을 만들어내는 집중력과 아이디어 구상을 경험했습니다.",
+    title: '경기 기후 바이브코딩 해커톤 개발 트랙 (특별상 수상)',
+    description: "국토지리정보원 특별상 수상. '기후 위기 해결'을 주제로 claude code를 활용하여 5시간 내에 기후 데이터 시각화 웹 프로토타입을 완성했습니다. 짧은 시간 내에 아이디어를 구체화하고 배포까지 완료하는 집중력을 발휘했습니다.",
   },
   {
     date: '2025.11 - 2025.12',
-    title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
-    description: '풀스택 개발자로 참여하여 Spring Boot를 사용하여 RESTful API를 구현하고, React를 사용하여 프론트엔드를 구현하였습니다. 본인은 프로젝트에서 컨텐츠 퀴즈 기능과 관리자 기능, 랭킹 페이지를 구현하였습니다.',
+    title: '컨텐츠 리뷰 사이트 프로젝트 (Review Tag)',
+    description: 'Spring Boot와 React를 활용한 풀스택 프로젝트입니다. RESTful API 설계를 주도하였으며, 인터랙티브한 컨텐츠 퀴즈 기능과 관리자 대시보드, 유저 활동에 따른 실시간 랭킹 시스템을 전담하여 구현했습니다.',
   },
   {
     date: '2025.10 - 2025.11',
-    title: '개인 쇼핑몰 사이트 프로젝트(King Heart)',
-    description: '풀스택 개발자로 참여하여 Spring boot로 백엔드를 구축하고 JSP를 통해 화면을 전송하는 DAO 패턴과 MVC 패턴을 익혔습니다. 본인은 장바구니 기능 및 상품 카테고리 구현과 카카오페이 결제 기능을 구현하였습니다.',
+    title: '개인 쇼핑몰 사이트 프로젝트 (King Heart)',
+    description: 'Spring Boot와 JSP를 기반으로 정통 MVC 패턴과 DAO 패턴을 적용하여 데이터 흐름을 깊이 있게 이해했습니다. 상품 옵션(SKU) 관리 로직과 장바구니 세션 처리, 카카오페이 API를 연동한 결제 프로세스 전반을 구현했습니다.',
   },
   {
     date: '2025.07 - 2025.12',
-    title: 'KH정보교육원 React & Spring 활용 자바(Java) 개발자 양성과정 수료',
-    description: 'Java/Spring 생태계 전반, React 기반의 웹 개발 기술을 학습하고 여러 번의 팀 프로젝트를 통해 협업 능력 및 소통 능력을 길렀습니다.',
+    title: 'React & Spring 활용 자바(Java) 개발자 양성과정 수료',
+    description: 'Java/Spring 프레임워크 생태계와 React 프론트엔드 기술을 체계적으로 학습했습니다. 총 2회의 팀 프로젝트를 수행하며 Git Flow 기반의 협업 워크플로우를 익히고, 요구사항 분석부터 배포까지의 개발 전체 사이클을 경험했습니다.',
   },
   {
     date: '2025.04 - 2025.12',
-    title: '스마트 알약 디스펜서 백엔드 구축(캡스톤)',
-    description: "'TDB_Server'는 NestJS 프레임워크를 사용하고 TypeScript로 작성된 백엔드 프로젝트입니다. React Native 모바일 앱과 라즈베리파이 하드웨어 클라이언트를 모두 지원합니다. 해당 프로젝트는 Gemini_CLI와 cursor를 활용하여 제작되었습니다.",
+    title: 'TDB_Server (스마트 알약 디스펜서, 캡스톤)',
+    description: "NestJS와 TypeScript를 도입하여 타입 안정성을 확보한 IoT 백엔드 서버입니다. React Native 앱과 라즈베리파이 하드웨어 간의 실시간 데이터 동기화를 처리했으며, Gemini CLI와 Cursor 등 AI 도구를 적극 활용하여 개발 생산성을 극대화했습니다.",
   },
   {
     date: '2024.10 - 2024.12',
-    title: '중고거래 앱 백엔드 구축(캡스톤)',
-    description: "'CRP_Server'는 ExpressJS 프레임워크를 사용하고 JavaScript로 작성된 백엔드 프로젝트입니다. RESTful API를 구현해 백엔드의 기초를 구현했습니다.",
+    title: 'CRP_Server (중고거래 플랫폼, 캡스톤)',
+    description: "Express.js와 JavaScript를 사용하여 구축한 경량화된 백엔드 서버입니다. REST API의 기본 원칙을 준수하여 엔드포인트를 설계했고, WebSocket을 활용한 실시간 채팅 기능의 기초를 다졌습니다.",
   },
 ];
 
@@ -319,7 +319,7 @@ export const otherExperienceData: OtherExperience[] = [
   },
   {
     title: 'CRP_Server(캡스톤)',
-    summary: 'ExpressJS 기반의 확장 가능한 RESTful API 서버 및 WebSocket 실시간 통신 구현',
+    summary: 'Express.jS 기반의 확장 가능한 RESTful API 서버 및 WebSocket 실시간 통신 구현',
     highlights: [
       'Express.js 프레임워크를 활용한 모듈화된 백엔드 아키텍처 설계',
       'RESTful API 설계 원칙을 준수한 엔드포인트 구현 및 문서화',
