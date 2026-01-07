@@ -1,10 +1,11 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '../common/Card';
 import { LinkButton } from '../common/Button';
 import { SectionTitle } from '../common/SectionTitle';
-import { FaGithub } from 'react-icons/fa';
-import { HiArrowUpRight } from 'react-icons/hi2';
+import { FaGithub, FaTools, FaExternalLinkAlt } from 'react-icons/fa';
+import { HiArrowUpRight, HiChevronDown } from 'react-icons/hi2';
 import { projectsData, otherExperienceData, featuredProjectsDescription, otherExperienceDescription } from '../../constants/data';
 
 const Section = styled.section`
@@ -99,6 +100,7 @@ const ProjectThumbnail = styled.div`
     opacity: 0;
     transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 24px;
+    pointer-events: none;
   }
 
   ${ProjectCard}:hover & {
@@ -114,13 +116,76 @@ const ProjectThumbnail = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
     filter: brightness(1);
+    display: block;
   }
 
   ${ProjectCard}:hover & img {
     transform: scale(1.15);
     filter: brightness(1.1) saturate(1.2);
+  }
+
+  a:hover img,
+  div:hover img {
+    transform: scale(1.05);
+  }
+`;
+
+const ThumbnailLink = styled.a`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+
+  img {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+`;
+
+const ThumbnailContent = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  img {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+`;
+
+const DeployIcon = styled.div`
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(17, 24, 39, 0.8);
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, background 0.2s ease;
+
+  ${ThumbnailLink}:hover & {
+    transform: scale(1.1);
+    background: #000000;
   }
 `;
 
@@ -213,6 +278,138 @@ const ProjectActions = styled.div`
   z-index: 1;
   margin-top: auto;
   padding-top: 1.5rem;
+  flex-wrap: wrap;
+`;
+
+const TroubleshootingButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #1f2937;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    background: #374151;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(31, 41, 55, 0.3);
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &[data-expanded='true'] svg {
+    transform: rotate(180deg);
+  }
+`;
+
+const TroubleshootingContent = styled(motion.div)`
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 1px solid #e5e8eb;
+`;
+
+const TroubleshootingItem = styled.div`
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const TroubleshootingTitle = styled.h4`
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text.heading};
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const TroubleshootingProblem = styled.div`
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fee2e215 0%, #fecaca08 100%);
+  border-left: 4px solid #ef4444;
+  border-radius: 8px;
+`;
+
+const TroubleshootingProblemLabel = styled.span`
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`;
+
+const TroubleshootingProblemText = styled.p`
+  color: #991b1b;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin: 0;
+`;
+
+const TroubleshootingSolution = styled.div`
+  padding: 1rem;
+  background: linear-gradient(135deg, #dbeafe15 0%, #bfdbfe08 100%);
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+`;
+
+const TroubleshootingSolutionLabel = styled.span`
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`;
+
+const TroubleshootingSolutionText = styled.p`
+  color: #1e40af;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin: 0;
+`;
+
+const TroubleshootingResult = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ecfdf515 0%, #bbf7d008 100%);
+  border-left: 4px solid #16a34a;
+  border-radius: 8px;
+`;
+
+const TroubleshootingResultLabel = styled.span`
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #15803d;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`;
+
+const TroubleshootingResultText = styled.p`
+  color: #166534;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin: 0;
 `;
 
 const OtherExperienceSection = styled.div`
@@ -430,6 +627,20 @@ const itemVariants = {
 };
 
 export const ProjectsSection: React.FC = () => {
+  const [expandedProjects, setExpandedProjects] = useState<Set<number>>(new Set());
+
+  const toggleTroubleshooting = (index: number) => {
+    setExpandedProjects((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <Section id="projects">
       <FeaturedProjectsSection>
@@ -449,50 +660,113 @@ export const ProjectsSection: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          {projectsData.map((project, index) => (
-            <ProjectCard key={index} as={motion.div} variants={itemVariants}>
-              <ProjectThumbnail>
-                {project.thumbnail ? (
-                  <img src={project.thumbnail} alt={project.title} />
-                ) : (
-                  project.title.charAt(0)
-                )}
-              </ProjectThumbnail>
-              <ProjectContent>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectDescription>{project.description}</ProjectDescription>
-                <ProjectTags>
-                  {project.tags.map((tag, tagIndex) => (
-                    <ProjectTag key={tagIndex}>#{tag}</ProjectTag>
-                  ))}
-                </ProjectTags>
-                <ProjectActions>
-                  {Array.isArray(project.githubUrl) ? (
-                    project.githubUrl.map((url, urlIndex) => (
+          {projectsData.map((project, index) => {
+            const isExpanded = expandedProjects.has(index);
+            return (
+              <ProjectCard key={index} as={motion.div} variants={itemVariants}>
+                <ProjectThumbnail>
+                  {project.deployUrl ? (
+                    <ThumbnailLink
+                      href={project.deployUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {project.thumbnail ? (
+                        <img src={project.thumbnail} alt={project.title} />
+                      ) : (
+                        project.title.charAt(0)
+                      )}
+                      <DeployIcon>
+                        <FaExternalLinkAlt size={12} />
+                      </DeployIcon>
+                    </ThumbnailLink>
+                  ) : (
+                    <ThumbnailContent>
+                      {project.thumbnail ? (
+                        <img src={project.thumbnail} alt={project.title} />
+                      ) : (
+                        project.title.charAt(0)
+                      )}
+                    </ThumbnailContent>
+                  )}
+                </ProjectThumbnail>
+                <ProjectContent>
+                  <ProjectTitle>{project.title}</ProjectTitle>
+                  <ProjectDescription>{project.description}</ProjectDescription>
+                  <ProjectTags>
+                    {project.tags.map((tag, tagIndex) => (
+                      <ProjectTag key={tagIndex}>#{tag}</ProjectTag>
+                    ))}
+                  </ProjectTags>
+                  <ProjectActions>
+                    {Array.isArray(project.githubUrl) ? (
+                      project.githubUrl.map((url, urlIndex) => (
+                        <LinkButton
+                          key={urlIndex}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          $variant="primary"
+                        >
+                          <FaGithub /> {urlIndex === 0 ? 'Backend' : 'Frontend'}
+                        </LinkButton>
+                      ))
+                    ) : (
                       <LinkButton
-                        key={urlIndex}
-                        href={url}
+                        href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         $variant="primary"
                       >
-                        <FaGithub /> {urlIndex === 0 ? 'Backend' : 'Frontend'}
+                        <FaGithub /> GitHub
                       </LinkButton>
-                    ))
-                  ) : (
-                    <LinkButton
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      $variant="primary"
-                    >
-                      <FaGithub /> GitHub
-                    </LinkButton>
+                    )}
+                    {project.troubleshooting && project.troubleshooting.length > 0 && (
+                      <TroubleshootingButton
+                        onClick={() => toggleTroubleshooting(index)}
+                        data-expanded={isExpanded}
+                      >
+                        <FaTools /> Trouble Shooting
+                        <HiChevronDown />
+                      </TroubleshootingButton>
+                    )}
+                  </ProjectActions>
+                  {project.troubleshooting && project.troubleshooting.length > 0 && (
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <TroubleshootingContent
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        >
+                          {project.troubleshooting.map((item, itemIndex) => (
+                            <TroubleshootingItem key={itemIndex}>
+                              <TroubleshootingTitle>{item.title}</TroubleshootingTitle>
+                              <TroubleshootingProblem>
+                                <TroubleshootingProblemLabel>Problem</TroubleshootingProblemLabel>
+                                <TroubleshootingProblemText>{item.problem}</TroubleshootingProblemText>
+                              </TroubleshootingProblem>
+                              <TroubleshootingSolution>
+                                <TroubleshootingSolutionLabel>Solution</TroubleshootingSolutionLabel>
+                                <TroubleshootingSolutionText>{item.solution}</TroubleshootingSolutionText>
+                              </TroubleshootingSolution>
+                            {item.result && (
+                              <TroubleshootingResult>
+                                <TroubleshootingResultLabel>Result</TroubleshootingResultLabel>
+                                <TroubleshootingResultText>{item.result}</TroubleshootingResultText>
+                              </TroubleshootingResult>
+                            )}
+                            </TroubleshootingItem>
+                          ))}
+                        </TroubleshootingContent>
+                      )}
+                    </AnimatePresence>
                   )}
-                </ProjectActions>
-              </ProjectContent>
-            </ProjectCard>
-          ))}
+                </ProjectContent>
+              </ProjectCard>
+            );
+          })}
         </FeaturedProjectsGrid>
       </FeaturedProjectsSection>
 

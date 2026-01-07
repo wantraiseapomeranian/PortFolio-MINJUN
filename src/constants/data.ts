@@ -45,6 +45,13 @@ export interface Project {
   tags: string[];
   githubUrl: string | string[];
   thumbnail?: string;
+  deployUrl?: string;
+  troubleshooting?: {
+    title: string;
+    problem: string;
+    solution: string;
+    result?: string;
+  }[];
 }
 
 export interface OtherExperience {
@@ -58,7 +65,7 @@ export interface OtherExperience {
 export const introData = {
   headline: '서비스 관점에서 끊임없이 문제를 해결하며 성장하는 개발자 김민준입니다.',
   subtext: '데이터의 무결성과 시스템의 안정성을 최우선으로 고려합니다. 단순한 기능 구현을 넘어, 확장 가능한 아키텍처를 설계하고 사용자 경험까지 고려한 최적의 솔루션을 고민합니다.',
-  techStack: ['Java', 'Spring Boot', 'React', 'JavaScript', 'Oracle SQL'],
+  techStack: ['Java', 'Spring Boot','Spring Security', 'MyBatis', 'Oracle SQL', 'React', 'Jotai'],
 };
 
 export const whatIDoData: WhatIDo[] = [
@@ -82,32 +89,32 @@ export const whatIDoData: WhatIDo[] = [
 export const timelineData: TimelineItem[] = [
   {
     date: '2025.12',
-    title: '경기 기후 바이브 해커톤 참여',
-    description: "'기후 위기 해결'을 주제로 한 무박 2일 해커톤에 참여하여 팀원들과 아이디어를 도출하고 프로토타입을 개발했습니다. 짧은 시간 내에 결과물을 만들어내는 집중력과 팀워크를 경험했습니다.",
+    title: '경기 기후 바이브코딩 해커톤 참여 및 특별상 수상',
+    description: "'기후 위기 해결'을 주제로 한 1일 해커톤에 참여하여 개인이 아이디어를 도출하고 프로토타입을 개발했습니다. 이 프로젝트로 국토지리정보원 특별상을 수상하였고, 짧은 시간 내에 결과물을 만들어내는 집중력과 아이디어 구상을 경험했습니다.",
   },
   {
     date: '2025.11 - 2025.12',
     title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
-    description: '풀스택 개발자로 참여하여 Spring Boot 와 React를 사용하여 RESTful API를 구현하고, 컨텐츠 퀴즈 기능과 관리자 기능, 랭킹 페이지를 구현하였습니다.',
+    description: '풀스택 개발자로 참여하여 Spring Boot를 사용하여 RESTful API를 구현하고, React를 사용하여 프론트엔드를 구현하였습니다. 본인은 프로젝트에서 컨텐츠 퀴즈 기능과 관리자 기능, 랭킹 페이지를 구현하였습니다.',
   },
   {
     date: '2025.10 - 2025.11',
-    title: '개인 쇼핑몰 프로젝트(King Heart)',
-    description: '풀스택 개발자로 참여하여 Spring boot로 백엔드를 구축하고 JSP를 통해 화면을 전송하는 MVC 패턴을 익혔고, 장바구니 기능 및 상품 카테고리 구현과 결제 기능을 구현하였습니다.',
+    title: '개인 쇼핑몰 사이트 프로젝트(King Heart)',
+    description: '풀스택 개발자로 참여하여 Spring boot로 백엔드를 구축하고 JSP를 통해 화면을 전송하는 DAO 패턴과 MVC 패턴을 익혔습니다. 본인은 장바구니 기능 및 상품 카테고리 구현과 카카오페이 결제 기능을 구현하였습니다.',
   },
   {
     date: '2025.07 - 2025.12',
-    title: 'React & Spring 활용 자바(Java) 개발자 양성과정 수료',
+    title: 'KH정보교육원 React & Spring 활용 자바(Java) 개발자 양성과정 수료',
     description: 'Java/Spring 생태계 전반, React 기반의 웹 개발 기술을 학습하고 여러 번의 팀 프로젝트를 통해 협업 능력 및 소통 능력을 길렀습니다.',
   },
   {
     date: '2025.04 - 2025.12',
-    title: 'TDB_Server(캡스톤)',
+    title: '스마트 알약 디스펜서 백엔드 구축(캡스톤)',
     description: "'TDB_Server'는 NestJS 프레임워크를 사용하고 TypeScript로 작성된 백엔드 프로젝트입니다. React Native 모바일 앱과 라즈베리파이 하드웨어 클라이언트를 모두 지원합니다. 해당 프로젝트는 Gemini_CLI와 cursor를 활용하여 제작되었습니다.",
   },
   {
     date: '2024.10 - 2024.12',
-    title: 'CRP_Server(캡스톤)',
+    title: '중고거래 앱 백엔드 구축(캡스톤)',
     description: "'CRP_Server'는 ExpressJS 프레임워크를 사용하고 JavaScript로 작성된 백엔드 프로젝트입니다. RESTful API를 구현해 백엔드의 기초를 구현했습니다.",
   },
 ];
@@ -246,19 +253,38 @@ export const projectsData: Project[] = [
   {
     title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
     thumbnail: '/assets/review_tag_main.png',
-    description: 'Spring Boot와 React를 활용하여 RESTful 아키텍처를 구현하고, 컨텐츠 퀴즈와 관리자 페이지, 랭킹 페이지를 구현하였습니다.',
-    tags: ['Java', 'Spring Boot', 'React', 'JavaScript', 'Axios', 'Bootstrap', 'Oracle SQL'],
+    description: '기존의 정적인 리뷰 사이트에 더 나아가 컨텐츠 관련 퀴즈 및 커뮤니티 기능들을 추가하여 사용자 친화적인 서비스를 제공하였고, 리뷰어 신뢰도 시스템을 도입하여 리뷰 품질을 향상시켰습니다.',
+    tags: ['Java', 'Spring Boot', 'MyBatis', 'Spring Security', 'Oracle SQL',
+          'React', 'JavaScript', 'Jotai', 'Axios', 'Bootstrap'],
     githubUrl: [
       'https://github.com/wantraiseapomeranian/reviewTag-be.git',
       'https://github.com/wantraiseapomeranian/reviewTag-fe.git',
     ],
+    deployUrl: 'https://example.com/review-tag',
+    troubleshooting: [
+      {
+        title: '퀴즈 하트 차감 시점 변경 및 우회 방지',
+        problem: '하트 차감 시점을 "제출 시"로 변경했으나, 하트 부족 시에도 게임 진입이 가능해 문제를 풀고도 제출하지 못하는 부정적인 경험(UX)과, 퀴즈 도중 이탈하거나 새로고침하여 하트 소모를 회피할 수 있는 로직 상의 허점이 존재했습니다.',
+        solution: '백엔드는 제출 시 차감 로직을 유지하여 트랜잭션을 보장하되, 프론트엔드 진입 단계(퀴즈 시작, 재도전)에서 하트 보유 여부를 사전 검증하는 "이중 방어 로직"을 구현했습니다. 추가로 게임 종료 시 서버 데이터와 클라이언트 상태를 동기화하여 서버와 클라이언트 간의 데이터 불일치를 방지하였습니다.',
+        result: '사용자 친화적인 UX(퀴즈 제출 시 하트 차감)를 유지하면서도 무분별한 재시도 및 재화 소모 회피를 원천 차단하여 시스템의 공정성을 확보했습니다.',
+      },
+    ],
   },
   {
     title: '개인 쇼핑몰 프로젝트(King Heart)',
-    thumbnail: '/assets/review_tag_main.png',
-    description: 'Spring Boot와 JSP를 활용한 정통 MVC 패턴을 적용하여 데이터 흐름을 명확히 제어하고 장바구니 기능과 상품 카테고리 구현과 결제 기능을 구현하였습니다.',
+    thumbnail: '/assets/king_heart_main.png',
+    description: '개인이 운영하는 쇼핑몰 사이트를 구현하면서 상품 카테고리 구현, 상품 옵션 방식(SKU)을 구현하여 재고 추가 및 관리가 용이하게 하였고, 장바구니 담기부터 카카오페이 결제까지의 로직 구현을 완료하였습니다.',
     tags: ['Java', 'Spring Boot', 'JSP', 'Ajax', 'jQuery', 'Oracle SQL'],
     githubUrl: 'https://github.com/wantraiseapomeranian/kingHeart.git',
+    deployUrl: 'https://example.com/king-heart',
+    troubleshooting: [
+      {
+        title: '상품 옵션 방식 개선',
+        problem: '상품별 옵션(색상, 사이즈 등)을 각각 별도 컬럼으로 관리할 경우, 새로운 옵션 속성이 추가될 때마다 DB 스키마를 변경해야 하는 확장성 문제가 있었으며, 조합된 옵션별로 독립적인 재고를 추적하기 어려웠습니다',
+        solution: "'상품-SKU' 간의 1:N 관계를 정의하는 SKU(Stock Keeping Unit) 방식을 도입했습니다. 관리자가 색상과 사이즈를 입력하면 백엔드에서 이를 하나의 옵션명으로 조합하여 독립적인 레코드로 생성하도록 구현했습니다.",
+        result: '옵션 조합별로 실시간 재고 차감 및 품절 처리가 가능해졌으며, 복잡한 다중 조인 없이도 데이터의 원자성과 무결성을 확보했습니다.',
+      },
+    ],
   },
 ];
 
