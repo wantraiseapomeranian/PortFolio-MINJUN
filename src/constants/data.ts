@@ -257,8 +257,8 @@ export const projectsData: Project[] = [
     tags: ['Java', 'Spring Boot', 'MyBatis', 'Spring Security', 'Oracle SQL',
           'React', 'JavaScript', 'Jotai', 'Axios', 'Bootstrap'],
     githubUrl: [
-      'https://github.com/wantraiseapomeranian/reviewTag-be.git',
-      'https://github.com/wantraiseapomeranian/reviewTag-fe.git',
+      'https://github.com/ReviewTag-Project/ReviewTag-Backend.git',
+      'https://github.com/ReviewTag-Project/ReviewTag-Frontend.git',
     ],
     deployUrl: 'https://example.com/review-tag',
     troubleshooting: [
