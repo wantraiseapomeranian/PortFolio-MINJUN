@@ -368,7 +368,7 @@ export const otherExperienceData: OtherExperience[] = [
   },
   {
     title: 'CRP_Server(캡스톤)',
-    summary: 'Express.jS 기반의 확장 가능한 RESTful API 서버 및 WebSocket 실시간 통신 구현',
+    summary: 'Express.js 기반의 확장 가능한 RESTful API 서버 및 WebSocket 실시간 통신 구현',
     highlights: [
       'Express.js 프레임워크를 활용한 모듈화된 백엔드 아키텍처 설계',
       'RESTful API 설계 원칙을 준수한 엔드포인트 구현 및 문서화',
