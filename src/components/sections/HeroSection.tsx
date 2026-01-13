@@ -1,7 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Card } from '../common/Card';
-import { Button, LinkButton } from '../common/Button';
+import { LinkButton } from '../common/Button';
 import { introData, whatIDoData, timelineData } from '../../constants/data';
 import { FaGithub, FaEnvelope } from 'react-icons/fa';
 
@@ -345,7 +346,7 @@ const boxVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 100,
     },
   },
@@ -361,11 +362,10 @@ export const HeroSection: React.FC = () => {
         animate="visible"
       >
         {/* Box 1: Introduction (2x2) */}
-        <IntroBox
-          as={motion.div}
+        <motion.div
           variants={boxVariants}
-          $shadow={true}
         >
+          <IntroBox $shadow={true}>
           <div>
             <Headline
               initial={{ opacity: 0, y: 20 }}
@@ -402,54 +402,55 @@ export const HeroSection: React.FC = () => {
               <FaEnvelope /> Contact
             </LinkButton>
           </CTAGroup>
-        </IntroBox>
+          </IntroBox>
+        </motion.div>
 
         {/* Box 2: Profile Image (1x2) */}
-        <ProfileBox
-          as={motion.div}
+        <motion.div
           variants={boxVariants}
-          $shadow={true}
         >
-          <ProfileImage
-            src="/assets/minjun_profile.jpg"
-            alt="프로필 사진"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.5, type: 'spring' }}
-          />
-        </ProfileBox>
+          <ProfileBox $shadow={true}>
+            <ProfileImage
+              src="/assets/minjun_profile.jpg"
+              alt="프로필 사진"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.5, type: 'spring' }}
+            />
+          </ProfileBox>
+        </motion.div>
 
         {/* Box 3: Open to Work Status (1x1) */}
-        <StatusBox
-          as={motion.div}
+        <motion.div
           variants={boxVariants}
-          $shadow={true}
         >
-          <StatusIndicator />
-          <StatusText>Open to Work</StatusText>
-          <StatusSubtext>Available for opportunities</StatusSubtext>
-        </StatusBox>
+          <StatusBox $shadow={true}>
+            <StatusIndicator />
+            <StatusText>Open to Work</StatusText>
+            <StatusSubtext>Available for opportunities</StatusSubtext>
+          </StatusBox>
+        </motion.div>
 
         {/* Box 4: Tech Stack Ticker (2x1) */}
-        <TechStackBox
-          as={motion.div}
+        <motion.div
           variants={boxVariants}
-          $shadow={true}
         >
-          <TechStackTitle>Tech Stack</TechStackTitle>
-          <TechStackContainer>
-            {introData.techStack.map((tech, index) => (
-              <TechTag
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-              >
-                {tech}
-              </TechTag>
-            ))}
-          </TechStackContainer>
-        </TechStackBox>
+          <TechStackBox $shadow={true}>
+            <TechStackTitle>Tech Stack</TechStackTitle>
+            <TechStackContainer>
+              {introData.techStack.map((tech, index) => (
+                <TechTag
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                >
+                  {tech}
+                </TechTag>
+              ))}
+            </TechStackContainer>
+          </TechStackBox>
+        </motion.div>
       </BentoGrid>
 
       {/* What I Do Section */}
