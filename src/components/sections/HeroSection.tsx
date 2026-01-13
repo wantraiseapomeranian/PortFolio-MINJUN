@@ -31,6 +31,20 @@ const BentoGrid = styled.div`
   }
 `;
 
+// Right Column Container (Open to Work + Tech Stack)
+const RightColumn = styled.div`
+  grid-column: span 1;
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.layout.gridGap};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+`;
+
 // Box 1: Introduction (2x2 - spans 2 columns, 2 rows)
 const IntroBox = styled(Card)`
   grid-column: span 2;
@@ -98,14 +112,13 @@ const ProfileImage = styled(motion.img)`
 
 // Box 3: Open to Work Status (1x1)
 const StatusBox = styled(Card)`
-  grid-column: span 1;
-  grid-row: span 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
   text-align: center;
+  flex: 1;
 `;
 
 const StatusIndicator = styled.div`
@@ -140,16 +153,11 @@ const StatusSubtext = styled.div`
   color: ${({ theme }) => theme.colors.text.body};
 `;
 
-// Box 4: Tech Stack Ticker (2x1 - spans 2 columns, 1 row)
+// Box 4: Tech Stack Ticker (1x1)
 const TechStackBox = styled(Card)`
-  grid-column: span 2;
-  grid-row: span 1;
   padding: 2rem;
   overflow: hidden;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    grid-column: span 1;
-  }
+  flex: 1;
 `;
 
 const TechStackTitle = styled.div`
@@ -420,36 +428,35 @@ export const HeroSection: React.FC = () => {
           </ProfileBox>
         </motion.div>
 
-        {/* Box 3: Open to Work Status (1x1) */}
+        {/* Right Column: Open to Work + Tech Stack */}
         <motion.div
           variants={boxVariants}
         >
-          <StatusBox $shadow={true}>
-            <StatusIndicator />
-            <StatusText>Open to Work</StatusText>
-            <StatusSubtext>Available for opportunities</StatusSubtext>
-          </StatusBox>
-        </motion.div>
+          <RightColumn>
+            {/* Box 3: Open to Work Status */}
+            <StatusBox $shadow={true}>
+              <StatusIndicator />
+              <StatusText>Open to Work</StatusText>
+              <StatusSubtext>Available for opportunities</StatusSubtext>
+            </StatusBox>
 
-        {/* Box 4: Tech Stack Ticker (2x1) */}
-        <motion.div
-          variants={boxVariants}
-        >
-          <TechStackBox $shadow={true}>
-            <TechStackTitle>Tech Stack</TechStackTitle>
-            <TechStackContainer>
-              {introData.techStack.map((tech, index) => (
-                <TechTag
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                >
-                  {tech}
-                </TechTag>
-              ))}
-            </TechStackContainer>
-          </TechStackBox>
+            {/* Box 4: Tech Stack Ticker */}
+            <TechStackBox $shadow={true}>
+              <TechStackTitle>Tech Stack</TechStackTitle>
+              <TechStackContainer>
+                {introData.techStack.map((tech, index) => (
+                  <TechTag
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                  >
+                    {tech}
+                  </TechTag>
+                ))}
+              </TechStackContainer>
+            </TechStackBox>
+          </RightColumn>
         </motion.div>
       </BentoGrid>
 
