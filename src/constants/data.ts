@@ -1,7 +1,7 @@
 import { FaCode, FaServer, FaCloud } from 'react-icons/fa';
 import { FaBook, FaComments, FaLightbulb } from 'react-icons/fa';
 import { FaJava, FaReact, FaDocker, FaAws } from 'react-icons/fa';
-import { SiSpringboot, SiJavascript, SiKubernetes, SiJenkins, SiGit, SiOracle, SiSwagger, SiAxios } from 'react-icons/si';
+import { SiSpringboot, SiJavascript, SiKubernetes, SiJenkins, SiGit, SiOracle, SiSwagger, SiAxios, SiSpringsecurity, SiNestjs, SiMysql, SiApache, SiTypescript, SiTailwindcss, SiPostman } from 'react-icons/si';
 
 export interface TechStack {
   name: string;
@@ -166,6 +166,27 @@ export const skillsData: SkillCategory[] = [
         color: '#6DB33F',
       },
       {
+        name: 'Swagger UI',
+        icon: SiSwagger,
+        percentage: 70,
+        description: 'RESTful API 문서화 및 테스트 도구',
+        color: '#85EA2D',
+      },
+      {
+        name: 'Spring Security',
+        icon: SiSpringsecurity,
+        percentage: 70,
+        description: '인증 및 권한 부여를 위한 강력한 보안 프레임워크 적용',
+        color: '#6DB33F',
+      },
+      {
+        name: 'MyBatis',
+        icon: SiApache,
+        percentage: 80,
+        description: 'SQL 매핑 프레임워크를 활용한 데이터 영속성 처리',
+        color: '#C40202',
+      },
+      {
         name: 'Oracle SQL',
         icon: SiOracle,
         percentage: 80,
@@ -173,11 +194,25 @@ export const skillsData: SkillCategory[] = [
         color: '#F80000',
       },
       {
-        name: 'Swagger UI',
-        icon: SiSwagger,
+        name: 'NestJS',
+        icon: SiNestjs,
+        percentage: 75,
+        description: '효율적이고 확장 가능한 서버 사이드 애플리케이션 구축',
+        color: '#E0234E',
+      },
+      {
+        name: 'TypeScript',
+        icon: SiTypescript,
         percentage: 70,
-        description: 'RESTful API 문서화 및 테스트 도구',
-        color: '#85EA2D',
+        description: '정적 타입을 통한 안정적인 코드 작성 및 유지보수',
+        color: '#3178C6',
+      },
+      {
+        name: 'MySQL',
+        icon: SiMysql,
+        percentage: 70,
+        description: '관계형 데이터베이스 관리 및 최적화',
+        color: '#4479A1',
       },
     ],
   },
@@ -204,6 +239,13 @@ export const skillsData: SkillCategory[] = [
         percentage: 90,
         description: 'HTTP 클라이언트 라이브러리를 활용한 API 통신',
         color: '#5A29E4',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: SiTailwindcss,
+        percentage: 60,
+        description: '유틸리티 퍼스트 CSS 프레임워크를 활용한 신속한 UI 개발',
+        color: '#06B6D4',
       },
     ],
   },
@@ -244,6 +286,13 @@ export const skillsData: SkillCategory[] = [
         percentage: 85,
         description: '버전 관리 및 협업 워크플로우',
         color: '#F05032',
+      },
+      {
+        name: 'Postman',
+        icon: SiPostman,
+        percentage: 85,
+        description: 'API 개발 생산성 향상 및 테스트 자동화',
+        color: '#FF6C37',
       },
     ],
   },

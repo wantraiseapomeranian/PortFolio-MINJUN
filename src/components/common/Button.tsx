@@ -48,9 +48,9 @@ const StyledButton = styled.button<BaseButtonProps>`
       border: none;
       
       &:hover {
-        background: #1E6FE8;
+        background: #0039CC;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(49, 130, 246, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 82, 255, 0.3);
       }
     `;
   }}
@@ -100,9 +100,9 @@ const StyledLink = styled.a<BaseButtonProps>`
       border: none;
       
       &:hover {
-        background: #1E6FE8;
+        background: #0039CC;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(49, 130, 246, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 82, 255, 0.3);
       }
     `;
   }}

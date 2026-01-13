@@ -1,92 +1,183 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Card } from '../common/Card';
+import { Button, LinkButton } from '../common/Button';
 import { introData, whatIDoData, timelineData } from '../../constants/data';
+import { FaGithub, FaEnvelope } from 'react-icons/fa';
 
 const Section = styled.section`
   padding: 120px 2rem 80px;
   max-width: ${({ theme }) => theme.layout.maxWidth};
   margin: 0 auto;
+  background: ${({ theme }) => theme.colors.background};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     padding: 100px 1.5rem 60px;
   }
 `;
 
-const IntroArea = styled.div`
+// Bento Grid Container
+const BentoGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 4rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: ${({ theme }) => theme.layout.gridGap};
   margin-bottom: 6rem;
-  align-items: center;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
+    grid-template-rows: auto;
   }
 `;
 
-const ProfileImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ProfileImage = styled.img`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 8px 30px rgba(49, 130, 246, 0.3);
-  border: 4px solid white;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 150px;
-    height: 150px;
-  }
-`;
-
-const IntroText = styled.div`
+// Box 1: Introduction (2x2 - spans 2 columns, 2 rows)
+const IntroBox = styled(Card)`
+  grid-column: span 2;
+  grid-row: span 2;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  justify-content: space-between;
+  padding: 3rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    grid-column: span 1;
+    grid-row: span 1;
+    padding: 2rem;
+  }
 `;
 
 const Headline = styled(motion.h1)`
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text.heading};
-  line-height: 1.4;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 `;
 
 const Subtext = styled(motion.p)`
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.text.body};
   line-height: 1.8;
+  margin-bottom: 2rem;
 `;
 
-const TechStackTags = styled(motion.div)`
+const CTAGroup = styled(motion.div)`
   display: flex;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
 `;
 
-const TechTag = styled.span`
+// Box 2: Profile Image (1x2 - spans 1 column, 2 rows)
+const ProfileBox = styled(Card)`
+  grid-column: span 1;
+  grid-row: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    grid-column: span 1;
+    grid-row: span 1;
+    min-height: 300px;
+  }
+`;
+
+const ProfileImage = styled(motion.img)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: ${({ theme }) => theme.layout.cardRadius};
+`;
+
+// Box 3: Open to Work Status (1x1)
+const StatusBox = styled(Card)`
+  grid-column: span 1;
+  grid-row: span 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+`;
+
+const StatusIndicator = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #10B981;
+  margin-bottom: 0.75rem;
+  animation: pulse 2s ease-in-out infinite;
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+  }
+`;
+
+const StatusText = styled.div`
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text.heading};
+  margin-bottom: 0.25rem;
+`;
+
+const StatusSubtext = styled.div`
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.colors.text.body};
+`;
+
+// Box 4: Tech Stack Ticker (2x1 - spans 2 columns, 1 row)
+const TechStackBox = styled(Card)`
+  grid-column: span 2;
+  grid-row: span 1;
+  padding: 2rem;
+  overflow: hidden;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    grid-column: span 1;
+  }
+`;
+
+const TechStackTitle = styled.div`
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text.body};
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`;
+
+const TechStackContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
+const TechTag = styled(motion.span)`
   padding: 0.5rem 1rem;
   background: ${({ theme }) => theme.colors.gray.light};
-  border-radius: 20px;
+  border-radius: 12px;
   font-size: 0.9rem;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.text.heading};
-  border: 1px solid ${({ theme }) => theme.colors.gray.border};
+  white-space: nowrap;
 `;
 
+// What I Do Section (기존 유지하되 스타일 조정)
 const WhatIDoSection = styled.div`
   margin-bottom: 6rem;
 `;
@@ -102,7 +193,7 @@ const WhatIDoTitle = styled.h2`
 const WhatIDoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: ${({ theme }) => theme.layout.gridGap};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
@@ -134,6 +225,7 @@ const WhatIDoDescription = styled.p`
   line-height: 1.6;
 `;
 
+// Timeline Section (기존 유지하되 스타일 조정)
 const TimelineSection = styled.div``;
 
 const TimelineTitle = styled.h2`
@@ -154,17 +246,16 @@ const TimelineItem = styled(motion.div)`
   padding-bottom: 3rem;
   padding-left: 2rem;
 
-  /* 각 항목마다 독립적인 수직선 (막대사탕 모양 - 원 아래에서 시작, 텍스트 끝까지) */
   &::before {
     content: '';
     position: absolute;
-    left: calc(-1.5rem + 10px); /* 원의 중심에 맞춤 (원 너비 20px의 절반) */
-    top: 20px; /* 큰 원(바깥쪽 원)의 하단 위치 (원 높이 20px) */
-    bottom: 3rem; /* padding-bottom 제외하고 텍스트 끝까지 */
+    left: calc(-1.5rem + 10px);
+    top: 20px;
+    bottom: 3rem;
     width: 2px;
     background: ${({ theme }) => theme.colors.primary};
     z-index: 0;
-    transform: translateX(-50%); /* 선의 중심을 원의 중심에 정확히 맞춤 */
+    transform: translateX(-50%);
   }
 `;
 
@@ -176,7 +267,6 @@ const TimelinePoint = styled.div`
   height: 20px;
   z-index: 2;
 
-  /* 바깥쪽 원 (얇은 파란색 테두리/그림자) */
   &::before {
     content: '';
     position: absolute;
@@ -187,11 +277,10 @@ const TimelinePoint = styled.div`
     height: 20px;
     border-radius: 50%;
     border: 1px solid ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 1px rgba(49, 130, 246, 0.3);
+    box-shadow: 0 0 0 1px rgba(0, 82, 255, 0.3);
     z-index: 1;
   }
 
-  /* 안쪽 원 (파란색 채워진 원 + 흰색 테두리) */
   &::after {
     content: '';
     position: absolute;
@@ -249,49 +338,121 @@ const itemVariants = {
   },
 };
 
+const boxVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      type: 'spring',
+      stiffness: 100,
+    },
+  },
+};
+
 export const HeroSection: React.FC = () => {
   return (
     <Section id="hero">
-      <IntroArea>
-        <ProfileImageWrapper>
-          <motion.div
+      <BentoGrid
+        as={motion.div}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Box 1: Introduction (2x2) */}
+        <IntroBox
+          as={motion.div}
+          variants={boxVariants}
+          $shadow={true}
+        >
+          <div>
+            <Headline
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              {introData.headline}
+            </Headline>
+            <Subtext
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {introData.subtext}
+            </Subtext>
+          </div>
+          <CTAGroup
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <LinkButton
+              href="https://github.com/wantraiseapomeranian"
+              target="_blank"
+              rel="noopener noreferrer"
+              $variant="primary"
+            >
+              <FaGithub /> GitHub
+            </LinkButton>
+            <LinkButton
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=alswns6258@gmail.com"
+              $variant="outline"
+            >
+              <FaEnvelope /> Contact
+            </LinkButton>
+          </CTAGroup>
+        </IntroBox>
+
+        {/* Box 2: Profile Image (1x2) */}
+        <ProfileBox
+          as={motion.div}
+          variants={boxVariants}
+          $shadow={true}
+        >
+          <ProfileImage
+            src="/assets/minjun_profile.jpg"
+            alt="프로필 사진"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ duration: 0.5, type: 'spring' }}
-          >
-            <ProfileImage 
-              src="/assets/minjun_profile.jpg" 
-              alt="프로필 사진"
-            />
-          </motion.div>
-        </ProfileImageWrapper>
-        <IntroText>
-          <Headline
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {introData.headline}
-          </Headline>
-          <Subtext
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {introData.subtext}
-          </Subtext>
-          <TechStackTags
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            {introData.techStack.map((tech, index) => (
-              <TechTag key={index}>{tech}</TechTag>
-            ))}
-          </TechStackTags>
-        </IntroText>
-      </IntroArea>
+          />
+        </ProfileBox>
 
+        {/* Box 3: Open to Work Status (1x1) */}
+        <StatusBox
+          as={motion.div}
+          variants={boxVariants}
+          $shadow={true}
+        >
+          <StatusIndicator />
+          <StatusText>Open to Work</StatusText>
+          <StatusSubtext>Available for opportunities</StatusSubtext>
+        </StatusBox>
+
+        {/* Box 4: Tech Stack Ticker (2x1) */}
+        <TechStackBox
+          as={motion.div}
+          variants={boxVariants}
+          $shadow={true}
+        >
+          <TechStackTitle>Tech Stack</TechStackTitle>
+          <TechStackContainer>
+            {introData.techStack.map((tech, index) => (
+              <TechTag
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+              >
+                {tech}
+              </TechTag>
+            ))}
+          </TechStackContainer>
+        </TechStackBox>
+      </BentoGrid>
+
+      {/* What I Do Section */}
       <WhatIDoSection>
         <WhatIDoTitle>What I Do</WhatIDoTitle>
         <WhatIDoGrid
@@ -304,7 +465,7 @@ export const HeroSection: React.FC = () => {
           {whatIDoData.map((item, index) => {
             const Icon = item.icon;
             return (
-              <WhatIDoCard key={index} $shadow as={motion.div} variants={itemVariants}>
+              <WhatIDoCard key={index} $shadow={true} as={motion.div} variants={itemVariants}>
                 <WhatIDoIcon>
                   <Icon />
                 </WhatIDoIcon>
@@ -316,6 +477,7 @@ export const HeroSection: React.FC = () => {
         </WhatIDoGrid>
       </WhatIDoSection>
 
+      {/* Timeline Section */}
       <TimelineSection>
         <TimelineTitle>Education & Experience</TimelineTitle>
         <TimelineContainer
@@ -326,8 +488,8 @@ export const HeroSection: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           {timelineData.map((item, index) => (
-            <TimelineItem 
-              key={index} 
+            <TimelineItem
+              key={index}
               variants={itemVariants}
             >
               <TimelinePoint />
@@ -341,4 +503,3 @@ export const HeroSection: React.FC = () => {
     </Section>
   );
 };
-

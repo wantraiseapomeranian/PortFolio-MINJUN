@@ -8,14 +8,20 @@ interface CardProps {
 }
 
 const StyledCard = styled.div<CardProps>`
-  background: ${({ $background, theme }) => $background || theme.colors.background};
-  border-radius: 12px;
+  background: ${({ $background, theme }) => $background || theme.colors.surface};
+  border-radius: ${({ theme }) => theme.layout.cardRadius};
   padding: ${({ $padding }) => $padding || '24px'};
-  box-shadow: ${({ $shadow }) => ($shadow ? '0 4px 20px rgba(0, 0, 0, 0.08)' : 'none')};
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: ${({ $shadow, theme }) => ($shadow ? theme.shadows.soft : 'none')};
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none; /* Remove heavy borders for soft UI */
 
   &:hover {
-    ${({ $shadow }) => $shadow && 'transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);'}
+    ${({ $shadow, theme }) => 
+      $shadow && `
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: ${theme.shadows.hover};
+      `
+    }
   }
 `;
 
