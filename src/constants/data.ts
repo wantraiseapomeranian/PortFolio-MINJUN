@@ -309,7 +309,7 @@ export const projectsData: Project[] = [
       'https://github.com/ReviewTag-Project/ReviewTag-Backend.git',
       'https://github.com/ReviewTag-Project/ReviewTag-Frontend.git',
     ],
-    deployUrl: 'https://example.com/review-tag',
+    deployUrl: 'https://review.minjun-portfolio.site',
     troubleshooting: [
       {
         title: '퀴즈 하트 차감 시점 변경 및 우회 방지',
@@ -325,7 +325,7 @@ export const projectsData: Project[] = [
     description: '개인이 운영하는 쇼핑몰 사이트를 구현하면서 상품 카테고리 구현, 상품 옵션 방식(SKU)을 구현하여 재고 추가 및 관리가 용이하게 하였고, 장바구니 담기부터 카카오페이 결제까지의 로직 구현을 완료하였습니다.',
     tags: ['Java', 'Spring Boot', 'JSP', 'Ajax', 'jQuery', 'Oracle SQL'],
     githubUrl: 'https://github.com/wantraiseapomeranian/kingHeart.git',
-    deployUrl: 'https://example.com/king-heart',
+    deployUrl: 'https://shop.minjun-portfolio.site',
     troubleshooting: [
       {
         title: '상품 옵션 방식 개선',
