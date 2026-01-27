@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  # Nginx
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./html/:/usr/share/nginx/html
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - project-shop
+    restart: always
+
+  # 쇼핑몰 사이트
+  project-shop:
+    build: ./kingHeart
+    container_name: shop-container
+    expose:
+      - "8080"
+    environment:
+      - TZ=Asia/Seoul
+    depends_on:
+      - oracle-db
+    restart: always
+    volumes:
+      - ./upload:/root/upload
+
+  # 리뷰 사이트 백엔드
+  review-server:
+    container_name: review-server
+    build: ./ReviewTag-Project/backend
+    
+    ports:
+      - "8081:8081"
+
+    # 사진 저장 폴더 연결
+    volumes:
+      - /home/ubuntu/upload_review:/root/upload_review
+    restart: always
+
+  # 쇼핑몰 DB
+  oracle-db:
+    image: gvenzl/oracle-xe:18.4.0-slim
+    container_name: oracle-container
+    environment:
+      ORACLE_PASSWORD: ${SHOP_DB_PW}
+    ports:
+      - "1521:1521"
+    restart: always
+
+  #  리뷰태그 DB
+  oracle-review:
+    image: gvenzl/oracle-xe:11
+    container_name: oracle-review
+    ports:
+      - "1522:1521"
+    environment:
+      ORACLE_PASSWORD: ${REVIEW_DB_PW}
+    restart: always
