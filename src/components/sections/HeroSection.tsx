@@ -67,6 +67,8 @@ const Headline = styled(motion.h1)`
   color: ${({ theme }) => theme.colors.text.heading};
   line-height: 1.2;
   margin-bottom: 1.5rem;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     font-size: 2rem;
@@ -232,6 +234,8 @@ const WhatIDoCardTitle = styled.h3`
 const WhatIDoDescription = styled.p`
   color: ${({ theme }) => theme.colors.text.body};
   line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 `;
 
 // Timeline Section (기존 유지하되 스타일 조정)

@@ -85,6 +85,8 @@ const CoreValueTitle = styled.h3`
 const CoreValueDescription = styled.p`
   color: ${({ theme }) => theme.colors.text.body};
   line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 `;
 
 const InformationSection = styled.div`
@@ -252,7 +254,7 @@ export const AboutSection: React.FC = () => {
               &nbsp;&nbsp;<CodeProperty>contact</CodeProperty><CodeBracket>:</CodeBracket> <CodeString>'{aboutData.information.contact}'</CodeString><CodeBracket>,</CodeBracket>
             </CodeLine>
             <CodeLine>
-              &nbsp;&nbsp;<CodeProperty>github</CodeProperty><CodeBracket>:</CodeBracket> <CodeString>'{aboutData.information.notion}'</CodeString>
+              &nbsp;&nbsp;<CodeProperty>github</CodeProperty><CodeBracket>:</CodeBracket> <CodeString>'{aboutData.information.github}'</CodeString>
             </CodeLine>
             <CodeLine>
               <CodeBracket>{'}'}</CodeBracket><CodeBracket>;</CodeBracket>

@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '../common/Card';
 import { LinkButton } from '../common/Button';
 import { SectionTitle } from '../common/SectionTitle';
-import { FaGithub, FaTools, FaExternalLinkAlt } from 'react-icons/fa';
-import { HiArrowUpRight, HiChevronDown } from 'react-icons/hi2';
+import { FaGithub, FaTools, FaExternalLinkAlt, FaGlobe } from 'react-icons/fa';
+import { HiArrowUpRight, HiChevronDown, HiChevronRight } from 'react-icons/hi2';
 import { projectsData, otherExperienceData, featuredProjectsDescription, otherExperienceDescription } from '../../constants/data';
 
 const Section = styled.section`
@@ -142,14 +142,56 @@ const ThumbnailLink = styled.a`
   position: relative;
   text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
 
   img {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
   }
 
   &:hover img {
     transform: scale(1.05);
+    filter: brightness(0.7);
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    background: rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const ThumbnailOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  pointer-events: none;
+
+  ${ThumbnailLink}:hover & {
+    opacity: 1;
+  }
+`;
+
+const ThumbnailOverlayText = styled.span`
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 `;
 
 const ThumbnailContent = styled.div`
@@ -281,61 +323,85 @@ const ProjectActions = styled.div`
   flex-wrap: wrap;
 `;
 
-const TroubleshootingButton = styled.button`
+// Troubleshooting Section Header
+const TroubleshootingSectionHeader = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text.heading};
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: #1f2937;
-  border: none;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #ffffff;
-  cursor: pointer;
+`;
+
+// Troubleshooting Accordion Container
+const TroubleshootingAccordion = styled.div`
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+// Troubleshooting Accordion Item
+const TroubleshootingAccordionItem = styled.div`
+  background: ${({ theme }) => theme.colors.surface};
+  border-radius: ${({ theme }) => theme.layout.cardRadius};
+  border: 1px solid ${({ theme }) => theme.colors.gray.border};
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.soft};
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
 
   &:hover {
-    background: #374151;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(31, 41, 55, 0.3);
+    box-shadow: ${({ theme }) => theme.shadows.hover};
+  }
+`;
+
+// Troubleshooting Accordion Header (Clickable)
+const TroubleshootingAccordionHeader = styled.button<{ $isOpen: boolean }>`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.gray.light};
   }
 
   svg {
     transition: transform 0.3s ease;
+    flex-shrink: 0;
+    color: ${({ theme }) => theme.colors.text.body};
   }
 
-  &[data-expanded='true'] svg {
-    transform: rotate(180deg);
-  }
+  ${({ $isOpen }) => $isOpen && `
+    svg {
+      transform: rotate(90deg);
+    }
+  `}
 `;
 
-const TroubleshootingContent = styled(motion.div)`
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background: #f9fafb;
-  border-radius: 12px;
-  border: 1px solid #e5e8eb;
-`;
-
-const TroubleshootingItem = styled.div`
-  margin-bottom: 1.5rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const TroubleshootingTitle = styled.h4`
-  font-size: 1.1rem;
+const TroubleshootingAccordionTitle = styled.h4`
+  font-size: 1rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text.heading};
-  margin-bottom: 1rem;
+  margin: 0;
+  flex: 1;
+  word-break: keep-all;
+`;
+
+// Troubleshooting Accordion Body (Expandable Content)
+const TroubleshootingAccordionBody = styled(motion.div)`
+  padding: 0 1.25rem 1.25rem;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const TroubleshootingProblem = styled.div`
@@ -627,15 +693,16 @@ const itemVariants = {
 };
 
 export const ProjectsSection: React.FC = () => {
-  const [expandedProjects, setExpandedProjects] = useState<Set<number>>(new Set());
+  const [expandedTroubleshootingItems, setExpandedTroubleshootingItems] = useState<Set<string>>(new Set());
 
-  const toggleTroubleshooting = (index: number) => {
-    setExpandedProjects((prev) => {
+  const toggleTroubleshootingItem = (projectIndex: number, itemIndex: number) => {
+    const key = `${projectIndex}-${itemIndex}`;
+    setExpandedTroubleshootingItems((prev) => {
       const newSet = new Set(prev);
-      if (newSet.has(index)) {
-        newSet.delete(index);
+      if (newSet.has(key)) {
+        newSet.delete(key);
       } else {
-        newSet.add(index);
+        newSet.add(key);
       }
       return newSet;
     });
@@ -661,7 +728,6 @@ export const ProjectsSection: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           {projectsData.map((project, index) => {
-            const isExpanded = expandedProjects.has(index);
             return (
               <ProjectCard key={index} as={motion.div} variants={itemVariants}>
                 <ProjectThumbnail>
@@ -676,6 +742,11 @@ export const ProjectsSection: React.FC = () => {
                       ) : (
                         project.title.charAt(0)
                       )}
+                      <ThumbnailOverlay>
+                        <ThumbnailOverlayText>
+                          Visit Site <FaExternalLinkAlt size={14} />
+                        </ThumbnailOverlayText>
+                      </ThumbnailOverlay>
                       <DeployIcon>
                         <FaExternalLinkAlt size={12} />
                       </DeployIcon>
@@ -721,47 +792,65 @@ export const ProjectsSection: React.FC = () => {
                         <FaGithub /> GitHub
                       </LinkButton>
                     )}
-                    {project.troubleshooting && project.troubleshooting.length > 0 && (
-                      <TroubleshootingButton
-                        onClick={() => toggleTroubleshooting(index)}
-                        data-expanded={isExpanded}
+                    {project.deployUrl && (
+                      <LinkButton
+                        href={project.deployUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        $variant="outline"
                       >
-                        <FaTools /> Trouble Shooting
-                        <HiChevronDown />
-                      </TroubleshootingButton>
+                        <FaGlobe /> Live Demo
+                      </LinkButton>
                     )}
                   </ProjectActions>
                   {project.troubleshooting && project.troubleshooting.length > 0 && (
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <TroubleshootingContent
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        >
-                          {project.troubleshooting.map((item, itemIndex) => (
-                            <TroubleshootingItem key={itemIndex}>
-                              <TroubleshootingTitle>{item.title}</TroubleshootingTitle>
-                              <TroubleshootingProblem>
-                                <TroubleshootingProblemLabel>Problem</TroubleshootingProblemLabel>
-                                <TroubleshootingProblemText>{item.problem}</TroubleshootingProblemText>
-                              </TroubleshootingProblem>
-                              <TroubleshootingSolution>
-                                <TroubleshootingSolutionLabel>Solution</TroubleshootingSolutionLabel>
-                                <TroubleshootingSolutionText>{item.solution}</TroubleshootingSolutionText>
-                              </TroubleshootingSolution>
-                            {item.result && (
-                              <TroubleshootingResult>
-                                <TroubleshootingResultLabel>Result</TroubleshootingResultLabel>
-                                <TroubleshootingResultText>{item.result}</TroubleshootingResultText>
-                              </TroubleshootingResult>
-                            )}
-                            </TroubleshootingItem>
-                          ))}
-                        </TroubleshootingContent>
-                      )}
-                    </AnimatePresence>
+                    <>
+                      <TroubleshootingSectionHeader>
+                        🔥 Key Technical Challenges
+                      </TroubleshootingSectionHeader>
+                      <TroubleshootingAccordion>
+                        {project.troubleshooting.map((item, itemIndex) => {
+                          const itemKey = `${index}-${itemIndex}`;
+                          const isItemOpen = expandedTroubleshootingItems.has(itemKey);
+                          return (
+                            <TroubleshootingAccordionItem key={itemIndex}>
+                              <TroubleshootingAccordionHeader
+                                $isOpen={isItemOpen}
+                                onClick={() => toggleTroubleshootingItem(index, itemIndex)}
+                              >
+                                <TroubleshootingAccordionTitle>{item.title}</TroubleshootingAccordionTitle>
+                                <HiChevronRight size={20} />
+                              </TroubleshootingAccordionHeader>
+                              <AnimatePresence>
+                                {isItemOpen && (
+                                  <TroubleshootingAccordionBody
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                  >
+                                    <TroubleshootingProblem>
+                                      <TroubleshootingProblemLabel>Problem</TroubleshootingProblemLabel>
+                                      <TroubleshootingProblemText>{item.problem}</TroubleshootingProblemText>
+                                    </TroubleshootingProblem>
+                                    <TroubleshootingSolution>
+                                      <TroubleshootingSolutionLabel>Solution</TroubleshootingSolutionLabel>
+                                      <TroubleshootingSolutionText>{item.solution}</TroubleshootingSolutionText>
+                                    </TroubleshootingSolution>
+                                    {item.result && (
+                                      <TroubleshootingResult>
+                                        <TroubleshootingResultLabel>Result</TroubleshootingResultLabel>
+                                        <TroubleshootingResultText>{item.result}</TroubleshootingResultText>
+                                      </TroubleshootingResult>
+                                    )}
+                                  </TroubleshootingAccordionBody>
+                                )}
+                              </AnimatePresence>
+                            </TroubleshootingAccordionItem>
+                          );
+                        })}
+                      </TroubleshootingAccordion>
+                    </>
                   )}
                 </ProjectContent>
               </ProjectCard>
