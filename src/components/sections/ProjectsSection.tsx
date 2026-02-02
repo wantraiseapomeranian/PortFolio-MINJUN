@@ -202,7 +202,7 @@ const ThumbnailImageContainer = styled.div`
 const ThumbnailTabGroup = styled.div`
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  left: 1rem;
   display: flex;
   gap: 0.5rem;
   z-index: 10;
@@ -215,7 +215,7 @@ const ThumbnailTabGroup = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     top: 0.75rem;
-    right: 0.75rem;
+    left: 0.75rem;
     gap: 0.25rem;
     padding: 0.2rem;
   }
