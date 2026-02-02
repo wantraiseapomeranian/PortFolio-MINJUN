@@ -1,7 +1,7 @@
 import { FaCode, FaServer, FaCloud, FaDatabase } from 'react-icons/fa';
-import { FaBook, FaComments, FaLightbulb } from 'react-icons/fa';
+import { FaComments} from 'react-icons/fa';
 import { FaJava, FaReact, FaDocker, FaAws } from 'react-icons/fa';
-import { SiSpringboot, SiJavascript, SiKubernetes, SiJenkins, SiGit, SiOracle, SiSwagger, SiAxios, SiSpringsecurity, SiNestjs, SiMysql, SiApache, SiTypescript, SiTailwindcss, SiPostman, SiNginx } from 'react-icons/si';
+import { SiSpringboot, SiJavascript, SiGit, SiOracle, SiSwagger, SiAxios, SiSpringsecurity, SiNestjs, SiMysql, SiApache, SiTypescript, SiTailwindcss, SiPostman, SiNginx } from 'react-icons/si';
 
 export interface TechStack {
   name: string;
@@ -44,7 +44,8 @@ export interface Project {
   description: string;
   tags: string[];
   githubUrl: string | string[];
-  thumbnail?: string;
+  thumbnailUI?: string;
+  thumbnailArch?: string;
   deployUrl?: string;
   troubleshooting?: {
     title: string;
@@ -294,7 +295,8 @@ export const skillsData: SkillCategory[] = [
 export const projectsData: Project[] = [
   {
     title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
-    thumbnail: '/assets/review_tag_main.png',
+    thumbnailUI: '/assets/review_tag_main.png',
+    thumbnailArch: '/assets/review_tag_arch.png',
     description: 'TMDB API 기반의 영화/TV 정보 제공 및 퀴즈 게이미피케이션 플랫폼입니다. 프로젝트 종료 후 Docker와 AWS EC2를 활용해 직접 배포 환경을 구축하여, 현재 실제 사용자가 접속 가능한 라이브 서비스로 고도화했습니다.',
     tags: [
           'Java', 'Spring Boot', 'MyBatis', 'Spring Security', 'Oracle SQL',
@@ -323,7 +325,8 @@ export const projectsData: Project[] = [
   },
   {
     title: '쇼핑몰 프로젝트(King Heart)',
-    thumbnail: '/assets/king_heart_main.png',
+    thumbnailUI: '/assets/king_heart_main.png',
+    thumbnailArch: '/assets/king_heart_arch.png',
     description: '주문/결제/재고 관리가 유기적으로 연결된 B2C 커머스 플랫폼입니다. 프로젝트 종료 후 독자적으로 카카오페이 실결제 프로세스(승인/취소)를 고도화하였으며, Docker 컨테이너 기반의 배포 환경을 직접 구축하여 운영 중입니다.',
     tags: [
       'Java', 'Spring Boot', 'JSP', 'Oracle SQL', 

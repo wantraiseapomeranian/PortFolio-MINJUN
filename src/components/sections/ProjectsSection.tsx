@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '../common/Card';
 import { LinkButton } from '../common/Button';
 import { SectionTitle } from '../common/SectionTitle';
-import { FaGithub, FaTools, FaExternalLinkAlt, FaGlobe } from 'react-icons/fa';
-import { HiArrowUpRight, HiChevronDown, HiChevronRight } from 'react-icons/hi2';
+import { FaGithub, FaExternalLinkAlt, FaGlobe } from 'react-icons/fa';
+import { HiArrowUpRight, HiChevronRight } from 'react-icons/hi2';
 import { projectsData, otherExperienceData, featuredProjectsDescription, otherExperienceDescription } from '../../constants/data';
 
 const Section = styled.section`
@@ -72,8 +72,9 @@ const ProjectThumbnail = styled.div`
   background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary} 0%, #1E6FE8 100%);
   border-radius: 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
   color: white;
   font-size: 4rem;
   font-weight: 700;
@@ -90,6 +91,7 @@ const ProjectThumbnail = styled.div`
     min-height: 300px;
     margin: 0;
     border-radius: 16px;
+    flex-direction: column;
   }
 
   &::after {
@@ -111,47 +113,16 @@ const ProjectThumbnail = styled.div`
       opacity: 1;
     }
   }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
-    filter: brightness(1);
-    display: block;
-  }
-
-  ${ProjectCard}:hover & img {
-    transform: scale(1.15);
-    filter: brightness(1.1) saturate(1.2);
-  }
-
-  a:hover img,
-  div:hover img {
-    transform: scale(1.05);
-  }
 `;
 
 const ThumbnailLink = styled.a`
   display: flex;
   width: 100%;
   height: 100%;
-  align-items: center;
-  justify-content: center;
   position: relative;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
-
-  img {
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-
-  &:hover img {
-    transform: scale(1.05);
-    filter: brightness(0.7);
-  }
 
   &::before {
     content: '';
@@ -198,17 +169,96 @@ const ThumbnailContent = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  overflow: hidden;
+`;
+
+const ThumbnailImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
 
   img {
-    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease, opacity 0.3s ease;
+    filter: brightness(1);
+    display: block;
   }
 
-  &:hover img {
+  ${ThumbnailLink}:hover & img,
+  ${ThumbnailContent}:hover & img {
     transform: scale(1.05);
+    filter: brightness(1.1) saturate(1.2);
   }
+`;
+
+const ThumbnailTabGroup = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 0.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    top: 0.75rem;
+    right: 0.75rem;
+    gap: 0.25rem;
+    padding: 0.2rem;
+  }
+`;
+
+const ThumbnailTab = styled.button<{ $isActive: boolean }>`
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: ${({ $isActive, theme }) => 
+    $isActive ? theme.colors.primary : 'transparent'};
+  color: ${({ $isActive, theme }) => 
+    $isActive ? '#ffffff' : theme.colors.text.heading};
+
+  &:hover {
+    background: ${({ $isActive, theme }) => 
+      $isActive ? theme.colors.primary : 'rgba(0, 82, 255, 0.1)'};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    gap: 0.4rem;
+  }
+`;
+
+const ThumbnailFallback = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, rgba(0, 82, 255, 0.3) 0%, rgba(0, 82, 255, 0.1) 100%);
 `;
 
 const DeployIcon = styled.div`
@@ -694,6 +744,7 @@ const itemVariants = {
 
 export const ProjectsSection: React.FC = () => {
   const [expandedTroubleshootingItems, setExpandedTroubleshootingItems] = useState<Set<string>>(new Set());
+  const [thumbnailViewModes, setThumbnailViewModes] = useState<Record<number, 'ui' | 'arch'>>({});
 
   const toggleTroubleshootingItem = (projectIndex: number, itemIndex: number) => {
     const key = `${projectIndex}-${itemIndex}`;
@@ -706,6 +757,13 @@ export const ProjectsSection: React.FC = () => {
       }
       return newSet;
     });
+  };
+
+  const setThumbnailViewMode = (projectIndex: number, mode: 'ui' | 'arch') => {
+    setThumbnailViewModes((prev) => ({
+      ...prev,
+      [projectIndex]: mode,
+    }));
   };
 
   return (
@@ -728,6 +786,9 @@ export const ProjectsSection: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           {projectsData.map((project, index) => {
+            const viewMode = thumbnailViewModes[index] || 'ui';
+            const hasBothImages = project.thumbnailUI && project.thumbnailArch;
+            
             return (
               <ProjectCard key={index} as={motion.div} variants={itemVariants}>
                 <ProjectThumbnail>
@@ -737,10 +798,58 @@ export const ProjectsSection: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {project.thumbnail ? (
-                        <img src={project.thumbnail} alt={project.title} />
-                      ) : (
-                        project.title.charAt(0)
+                      <ThumbnailImageContainer>
+                        <AnimatePresence mode="wait">
+                          {viewMode === 'ui' && project.thumbnailUI ? (
+                            <motion.img
+                              key="ui"
+                              src={project.thumbnailUI}
+                              alt={`${project.title} UI`}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          ) : viewMode === 'arch' && project.thumbnailArch ? (
+                            <motion.img
+                              key="arch"
+                              src={project.thumbnailArch}
+                              alt={`${project.title} Architecture`}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          ) : (
+                            <ThumbnailFallback key="fallback">
+                              {project.title.charAt(0)}
+                            </ThumbnailFallback>
+                          )}
+                        </AnimatePresence>
+                      </ThumbnailImageContainer>
+                      {hasBothImages && (
+                        <ThumbnailTabGroup onClick={(e) => e.preventDefault()}>
+                          <ThumbnailTab
+                            $isActive={viewMode === 'ui'}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setThumbnailViewMode(index, 'ui');
+                            }}
+                          >
+                            🖥️ Service
+                          </ThumbnailTab>
+                          <ThumbnailTab
+                            $isActive={viewMode === 'arch'}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setThumbnailViewMode(index, 'arch');
+                            }}
+                          >
+                            ⚙️ Architecture
+                          </ThumbnailTab>
+                        </ThumbnailTabGroup>
                       )}
                       <ThumbnailOverlay>
                         <ThumbnailOverlayText>
@@ -753,10 +862,50 @@ export const ProjectsSection: React.FC = () => {
                     </ThumbnailLink>
                   ) : (
                     <ThumbnailContent>
-                      {project.thumbnail ? (
-                        <img src={project.thumbnail} alt={project.title} />
-                      ) : (
-                        project.title.charAt(0)
+                      <ThumbnailImageContainer>
+                        <AnimatePresence mode="wait">
+                          {viewMode === 'ui' && project.thumbnailUI ? (
+                            <motion.img
+                              key="ui"
+                              src={project.thumbnailUI}
+                              alt={`${project.title} UI`}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          ) : viewMode === 'arch' && project.thumbnailArch ? (
+                            <motion.img
+                              key="arch"
+                              src={project.thumbnailArch}
+                              alt={`${project.title} Architecture`}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          ) : (
+                            <ThumbnailFallback key="fallback">
+                              {project.title.charAt(0)}
+                            </ThumbnailFallback>
+                          )}
+                        </AnimatePresence>
+                      </ThumbnailImageContainer>
+                      {hasBothImages && (
+                        <ThumbnailTabGroup>
+                          <ThumbnailTab
+                            $isActive={viewMode === 'ui'}
+                            onClick={() => setThumbnailViewMode(index, 'ui')}
+                          >
+                            🖥️ Service
+                          </ThumbnailTab>
+                          <ThumbnailTab
+                            $isActive={viewMode === 'arch'}
+                            onClick={() => setThumbnailViewMode(index, 'arch')}
+                          >
+                            ⚙️ Architecture
+                          </ThumbnailTab>
+                        </ThumbnailTabGroup>
                       )}
                     </ThumbnailContent>
                   )}
