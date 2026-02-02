@@ -295,7 +295,7 @@ export const projectsData: Project[] = [
   {
     title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
     thumbnail: '/assets/review_tag_main.png',
-    description: '기존의 정적인 리뷰 사이트에 더 나아가 컨텐츠 관련 퀴즈 및 커뮤니티 기능들을 추가하여 사용자 친화적인 서비스를 제공하였고, 리뷰어 신뢰도 시스템을 도입하여 리뷰 품질을 향상시켰습니다.',
+    description: 'TMDB API 기반의 영화/TV 정보 제공 및 퀴즈 게이미피케이션 플랫폼입니다. 프로젝트 종료 후 Docker와 AWS EC2를 활용해 직접 배포 환경을 구축하여, 현재 실제 사용자가 접속 가능한 라이브 서비스로 고도화했습니다.',
     tags: [
           'Java', 'Spring Boot', 'MyBatis', 'Spring Security', 'Oracle SQL',
           'React', 'JavaScript', 'Jotai', 'Axios',
