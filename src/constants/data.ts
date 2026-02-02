@@ -1,7 +1,7 @@
-import { FaCode, FaServer, FaCloud } from 'react-icons/fa';
+import { FaCode, FaServer, FaCloud, FaDatabase } from 'react-icons/fa';
 import { FaBook, FaComments, FaLightbulb } from 'react-icons/fa';
 import { FaJava, FaReact, FaDocker, FaAws } from 'react-icons/fa';
-import { SiSpringboot, SiJavascript, SiKubernetes, SiJenkins, SiGit, SiOracle, SiSwagger, SiAxios, SiSpringsecurity, SiNestjs, SiMysql, SiApache, SiTypescript, SiTailwindcss, SiPostman } from 'react-icons/si';
+import { SiSpringboot, SiJavascript, SiKubernetes, SiJenkins, SiGit, SiOracle, SiSwagger, SiAxios, SiSpringsecurity, SiNestjs, SiMysql, SiApache, SiTypescript, SiTailwindcss, SiPostman, SiNginx } from 'react-icons/si';
 
 export interface TechStack {
   name: string;
@@ -63,26 +63,26 @@ export interface OtherExperience {
 }
 
 export const introData = {
-  headline: '서비스 관점에서 끊임없이 문제를 해결하며 성장하는 개발자 김민준입니다.',
+  headline: '인프라를 이해하고 서비스의 안정성을 책임지는 백엔드 개발자 김민준입니다.',
   subtext: '데이터의 무결성과 시스템의 안정성을 최우선으로 고려합니다. 단순한 기능 구현을 넘어, 확장 가능한 아키텍처를 설계하고 사용자 경험까지 고려한 최적의 솔루션을 고민합니다.',
-  techStack: ['Java', 'Spring Boot','Spring Security', 'MyBatis', 'Oracle SQL', 'React', 'Jotai'],
+  techStack: ['Java', 'Spring Boot','Spring Security', 'MyBatis', 'Oracle SQL', 'React', 'AWS', 'Docker', 'Nginx'],
 };
 
 export const whatIDoData: WhatIDo[] = [
   {
     title: 'Frontend',
     icon: FaCode,
-    description: 'React를 활용하여 웹 환경을 아우르는 서비스를 구축합니다. 재사용 가능한 컴포넌트 설계로 개발 생산성을 높입니다.',
+    description: 'React를 활용하여 웹 환경을 아우르는 서비스를 구축합니다. 재사용 가능한 컴포넌트 설계와 상태 관리를 통해 사용자 경험(UX)을 최적화합니다.',
   },
   {
     title: 'Backend Engineering',
     icon: FaServer,
-    description: 'Spring Boot의 안정성과 NestJS의 유연함을 모두 활용합니다. 복잡한 비즈니스 로직을 명확한 아키텍처로 풀어내며, 확장성과 데이터 무결성을 최우선으로 고려한 API를 설계합니다.',
+    description: 'Spring Boot와 Oracle을 기반으로 견고한 비즈니스 로직을 구현합니다. 트랜잭션 관리를 통한 데이터 무결성 보장과 확장 가능한 RESTful API 설계에 집중합니다.',
   },
   {
     title: 'DevOps',
     icon: FaCloud,
-    description: 'AWS EC2/RDS 환경을 다루며, 서비스 배포와 운영을 위한 기초 인프라를 구축합니다.',
+    description: 'AWS EC2와 Docker Compose를 활용해 컨테이너 기반의 배포 환경을 직접 구축합니다. Nginx 리버스 프록시 및 SSL 적용을 통해 보안과 안정성을 고려한 인프라를 설계합니다.',
   },
 ];
 
@@ -121,19 +121,19 @@ export const timelineData: TimelineItem[] = [
 
 export const coreValuesData: CoreValue[] = [
   {
-    title: '전체적인 계획 수립',
-    icon: FaBook,
-    description: '프로젝트의 전체적인 계획을 수립하고 일정을 관리하여 프로젝트를 원활하게 진행합니다.',
+    title: '데이터 무결성 추구', 
+    icon: FaDatabase,
+    description: '결제 시스템을 구축하며 1원의 오차도 허용하지 않는 정합성을 경험했습니다. 예외 상황에서도 시스템의 신뢰를 지키는 견고한 로직을 최우선으로 합니다.',
   },
   {
-    title: '원활한 소통',
+    title: '근거 있는 소통',
     icon: FaComments,
-    description: '명확한 커뮤니케이션을 통해 팀과의 협업을 원활하게 이끌어갑니다.',
+    description: '막연한 주장보다는 명확한 API 명세서와 DB 설계도를 통해 팀을 설득합니다. 문서화를 통해 불필요한 커뮤니케이션 비용을 줄이고 개발 방향을 일치시킵니다.',
   },
   {
-    title: '문제 해결력',
-    icon: FaLightbulb,
-    description: '원인을 파악하고 문제를 해결하는 과정에서 성장하고 있습니다.',
+    title: '서비스 관점의 시야',
+    icon: FaServer,
+    description: '코드 작성을 넘어, Docker와 AWS를 활용한 배포 환경까지 고려합니다. 개발과 운영의 간극을 줄이고, 실제 사용자가 만나는 서비스의 안정성을 고민합니다.',
   },
 ];
 
@@ -143,7 +143,7 @@ export const aboutData = {
     name: '김민준',
     education: '경동대학교 컴퓨터공학과',
     contact: 'alswns6258@gmail.com',
-    notion: 'https://github.com/wantraiseapomeranian',
+    github: 'https://github.com/wantraiseapomeranian',
   },
 };
 
@@ -227,7 +227,7 @@ export const skillsData: SkillCategory[] = [
         color: '#61DAFB',
       },
       {
-        name: 'JavaScript',
+        name: 'JavaScript (ES6+)',
         icon: SiJavascript,
         percentage: 80,
         description: 'ES6+ 문법을 활용한 모던 자바스크립트 개발',
@@ -250,38 +250,31 @@ export const skillsData: SkillCategory[] = [
     ],
   },
   {
-    title: 'Collaboration & DevOps',
+    title: 'Infra & DevOps',
     skills: [
       {
         name: 'Docker',
         icon: FaDocker,
-        percentage: 50,
-        description: '컨테이너 기반 애플리케이션 배포 및 관리',
+        percentage: 60,
+        description: 'Docker Compose를 활용한 다중 컨테이너 환경 구축 및 네트워크 관리',
         color: '#2496ED',
-      },
-      {
-        name: 'Kubernetes',
-        icon: SiKubernetes,
-        percentage: 50,
-        description: '컨테이너 오케스트레이션 및 클러스터 관리',
-        color: '#326CE5',
       },
       {
         name: 'AWS',
         icon: FaAws,
-        percentage: 80,
+        percentage: 70,
         description: '클라우드 인프라 구축 및 관리',
         color: '#FF9900',
       },
       {
-        name: 'Jenkins',
-        icon: SiJenkins,
-        percentage: 70,
-        description: 'CI/CD 파이프라인 구축 및 자동화',
-        color: '#D24939',
+        name: 'Nginx',
+        icon: SiNginx,
+        percentage: 60,
+        description: '리버스 프록시 설정 및 SSL 인증서 적용을 통한 보안 강화',
+        color: '#009639',
       },
       {
-        name: 'Git',
+        name: 'Git & GitHub',
         icon: SiGit,
         percentage: 85,
         description: '버전 관리 및 협업 워크플로우',
@@ -303,8 +296,11 @@ export const projectsData: Project[] = [
     title: '컨텐츠 리뷰 사이트 프로젝트(Review Tag)',
     thumbnail: '/assets/review_tag_main.png',
     description: '기존의 정적인 리뷰 사이트에 더 나아가 컨텐츠 관련 퀴즈 및 커뮤니티 기능들을 추가하여 사용자 친화적인 서비스를 제공하였고, 리뷰어 신뢰도 시스템을 도입하여 리뷰 품질을 향상시켰습니다.',
-    tags: ['Java', 'Spring Boot', 'MyBatis', 'Spring Security', 'Oracle SQL',
-          'React', 'JavaScript', 'Jotai', 'Axios', 'Bootstrap'],
+    tags: [
+          'Java', 'Spring Boot', 'MyBatis', 'Spring Security', 'Oracle SQL',
+          'React', 'JavaScript', 'Jotai', 'Axios',
+          'Docker', 'Nginx', 'AWS'
+        ],
     githubUrl: [
       'https://github.com/ReviewTag-Project/ReviewTag-Backend.git',
       'https://github.com/ReviewTag-Project/ReviewTag-Frontend.git',
@@ -317,13 +313,23 @@ export const projectsData: Project[] = [
         solution: '백엔드는 제출 시 차감 로직을 유지하여 트랜잭션을 보장하되, 프론트엔드 진입 단계(퀴즈 시작, 재도전)에서 하트 보유 여부를 사전 검증하는 "이중 방어 로직"을 구현했습니다. 추가로 게임 종료 시 서버 데이터와 클라이언트 상태를 동기화하여 서버와 클라이언트 간의 데이터 불일치를 방지하였습니다.',
         result: '사용자 친화적인 UX(퀴즈 제출 시 하트 차감)를 유지하면서도 무분별한 재시도 및 재화 소모 회피를 원천 차단하여 시스템의 공정성을 확보했습니다.',
       },
+      {
+        title: 'Docker 컨테이너 네트워크 및 Nginx 리버스 프록시 설정',
+        problem: '로컬에서는 잘 작동하던 서비스가 Docker 배포 시 컨테이너 간 통신 실패로 인해 502 Bad Gateway 에러가 발생했습니다. 또한, HTTPS 적용을 위한 SSL 인증서 설정이 필요했습니다.',
+        solution: 'Docker Compose의 내부 DNS를 활용하여 컨테이너 간 통신 경로를 재설정하고, Nginx를 리버스 프록시로 배치하여 외부 요청(80/443)을 내부 Spring Boot(8080)로 라우팅하도록 아키텍처를 개선했습니다.',
+        result: 'Certbot을 통해 SSL 인증서를 자동 발급받아 보안(HTTPS)을 강화했으며, 안정적인 무중단 배포 환경을 구축하는 데 성공했습니다.',
+      },
     ],
   },
   {
-    title: '개인 쇼핑몰 프로젝트(King Heart)',
+    title: '쇼핑몰 프로젝트(King Heart)',
     thumbnail: '/assets/king_heart_main.png',
-    description: '개인이 운영하는 쇼핑몰 사이트를 구현하면서 상품 카테고리 구현, 상품 옵션 방식(SKU)을 구현하여 재고 추가 및 관리가 용이하게 하였고, 장바구니 담기부터 카카오페이 결제까지의 로직 구현을 완료하였습니다.',
-    tags: ['Java', 'Spring Boot', 'JSP', 'Ajax', 'jQuery', 'Oracle SQL'],
+    description: '주문/결제/재고 관리가 유기적으로 연결된 B2C 커머스 플랫폼입니다. 프로젝트 종료 후 독자적으로 카카오페이 실결제 프로세스(승인/취소)를 고도화하였으며, Docker 컨테이너 기반의 배포 환경을 직접 구축하여 운영 중입니다.',
+    tags: [
+      'Java', 'Spring Boot', 'JSP', 'Oracle SQL', 
+      'Spring WebFlux',
+      'Docker', 'Nginx', 'AWS'
+    ],
     githubUrl: 'https://github.com/wantraiseapomeranian/kingHeart.git',
     deployUrl: 'https://shop.minjun-portfolio.site',
     troubleshooting: [
@@ -333,23 +339,29 @@ export const projectsData: Project[] = [
         solution: "'상품-SKU' 간의 1:N 관계를 정의하는 SKU(Stock Keeping Unit) 방식을 도입했습니다. 관리자가 색상과 사이즈를 입력하면 백엔드에서 이를 하나의 옵션명으로 조합하여 독립적인 레코드로 생성하도록 구현했습니다.",
         result: '옵션 조합별로 실시간 재고 차감 및 품절 처리가 가능해졌으며, 복잡한 다중 조인 없이도 데이터의 원자성과 무결성을 확보했습니다.',
       },
+      {
+        title: '결제 데이터 정합성 보장 (Transaction & Rollback)',
+        problem: '외부 PG사(카카오페이)의 결제 승인은 성공했으나, 네트워크 불안정 등으로 내부 DB에 주문 내역이 저장되지 않는 "Ghost Order" 발생 위험이 있었습니다.',
+        solution: '결제 승인과 주문 생성을 하나의 트랜잭션(@Transactional)으로 묶고, 내부 로직 실패 시 즉시 결제 취소 API를 호출하는 "망취소(자동 롤백) 로직"을 구현하여 원자성을 보장했습니다.',
+        result: '테스트 환경의 강제 오류 상황에서도 결제 금액과 주문 데이터가 100% 일치하는 무결성을 확보했습니다.',
+      },
     ],
   },
 ];
 
-export const featuredProjectsDescription = '주요 프로젝트들을 통해 다양한 기술 스택과 문제 해결 경험을 쌓았습니다.';
+export const featuredProjectsDescription = '단순한 기능 구현을 넘어, 서비스의 안정성과 확장 가능한 아키텍처를 고민합니다. 비즈니스 로직의 깊이와 인프라 구축의 넓이를 모두 경험했습니다.';
 
 export const otherExperienceDescription = '캡스톤 프로젝트와 해커톤 참여를 통해 기본 기술들을 학습하고 성장하고 있습니다.';
 
 export const otherExperienceData: OtherExperience[] = [
   {
-    title: '경기 기후 바이브코딩 해커톤 개발 트랙',
-    summary: '국토지리정보원 특별상을 수상한 기후 데이터 시각화 웹 애플리케이션 개발',
+    title: '경기 기후 바이브코딩 해커톤 (개발 트랙)',
+    summary: '🏆 국토지리정보원장상(특별상) 수상 | 기후 데이터 시각화 웹 플랫폼',
     highlights: [
-      'React와 Tailwind CSS를 활용한 반응형 UI/UX 설계 및 구현',
-      'Leaflet 지도 라이브러리를 통한 실시간 기후 데이터 시각화',
-      '바이브 코딩 방식을 통한 아이디어 구상부터 프로토타입까지 5시간 내 완성',
-      'Vercel을 활용한 빠른 배포 및 성능 최적화'
+      '기획부터 배포까지 5시간 제한의 극한 환경에서 Agile하게 MVP(최소 기능 제품) 완성',
+      'React와 Leaflet 라이브러리를 결합하여 대용량 기후 데이터를 지도 위에 효과적으로 시각화',
+      'Vercel을 활용한 CI/CD 및 즉각적인 배포 파이프라인 구축',
+      '팀원과의 긴밀한 협업으로 바이브 코딩(AI 협업) 방식의 효율성 극대화'
     ],
     techStack: ['React', 'JavaScript', 'Tailwind CSS', 'Leaflet', 'Vercel'],
     githubUrl: 'https://github.com/wantraiseapomeranian/green-life-scouter.git',
@@ -358,17 +370,17 @@ export const otherExperienceData: OtherExperience[] = [
     title: 'TDB_Server(캡스톤)',
     summary: 'IoT 하드웨어와 모바일 앱을 연결하는 하이브리드 아키텍처 기반의 NestJS 백엔드 서버',
     highlights: [
-      'React Native 앱과 Raspberry Pi 하드웨어 클라이언트 간의 실시간 데이터 동기화 처리',
-      'Gemini CLI 및 AI 도구(Cursor)를 활용한 워크플로우 최적화 및 빠른 기능 구현',
-      '타입 안정성을 위한 TypeScript 도입 및 RESTful API 설계',
-      'MySQL 데이터베이스를 활용한 약물 관리 및 사용자 데이터 처리 시스템 구축'
+      'Raspberry Pi(하드웨어)와 React Native(앱) 간의 실시간 데이터 동기화 프로토콜 설계',
+      'TypeScript의 정적 타이핑을 통해 하드웨어 통신 간 발생할 수 있는 데이터 오류 사전 방지',
+      'AI 개발 도구(Cursor, Gemini)를 워크플로우에 적극 도입하여 개발 생산성 200% 향상',
+      'MySQL Relation 설계를 통한 다대다(N:M) 약물-사용자 관계 데이터 모델링'
     ],
-    techStack: ['NestJS', 'TypeScript', 'RESTful API', 'MySQL', 'Raspberry Pi', 'Gemini CLI', 'cursor'],
+    techStack: ['NestJS', 'TypeScript', 'MySQL', 'Raspberry Pi', 'Cursor IDE'],
     githubUrl: 'https://github.com/wantraiseapomeranian/TDB_Server.git',
   },
   {
     title: 'CRP_Server(캡스톤)',
-    summary: 'Express.js 기반의 확장 가능한 RESTful API 서버 및 WebSocket 실시간 통신 구현',
+    summary: 'Node.js 생태계와 비동기 처리를 이해하기 위한 Express.js 기반의 서버',
     highlights: [
       'Express.js 프레임워크를 활용한 모듈화된 백엔드 아키텍처 설계',
       'RESTful API 설계 원칙을 준수한 엔드포인트 구현 및 문서화',
